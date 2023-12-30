@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import QUESTIONS from "../questions.js";
+import QuestionTimer from "./QuestionTimer.jsx";
 import quizCompleteImage from "../assets/quiz-complete.png";
 
 export default function Quiz() {
@@ -9,9 +10,17 @@ export default function Quiz() {
   const activeQuestionIndex = userAnswers.length;
   const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
 
-  const selectAnswerHandler = (selectedAnswer) => {
+  const selectAnswerHandler = useCallback(function selectAnswerHandler(
+    selectedAnswer
+  ) {
     setUserAnswers((prevUserAnswers) => [...prevUserAnswers, selectedAnswer]);
-  };
+  },
+  []);
+
+  const skipAnswerHandler = useCallback(
+    () => selectAnswerHandler(null),
+    [selectAnswerHandler]
+  );
 
   if (quizIsComplete) {
     return (
@@ -38,6 +47,11 @@ export default function Quiz() {
   return (
     <div className="max-w-[50rem] m-auto p-8 bg-gradient-to-b from-[#3e2a6060] to-[#32106160] backdrop-blur-md rounded-lg shadow-dark-blue text-center">
       <div id="question">
+        <QuestionTimer
+          key={activeQuestionIndex}
+          timeout={10000}
+          onTimeout={skipAnswerHandler}
+        />
         <h2 className="font-roboto text-2xl font-normal mt-2 mx-0 mb-10 text-[#bdabdd]">
           {QUESTIONS[activeQuestionIndex].text}
         </h2>
