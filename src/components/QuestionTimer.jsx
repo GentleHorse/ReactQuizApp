@@ -3,13 +3,14 @@ import { Progress } from "@material-tailwind/react";
 
 /**
  *
- * @param timeout timer duration
- * @param onTimeout function once timer expires, you need to use with useCallback
+ * @param {int} timeout timer duration
+ * @param {function} onTimeout function once timer expires, you need to use with useCallback
+ * @param {string} color progress bar color
  * @returns Progress bar component
  *
  */
 
-export default function QuestionTimer({ timeout, onTimeout }) {
+export default function QuestionTimer({ timeout, onTimeout, color }) {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
@@ -35,8 +36,8 @@ export default function QuestionTimer({ timeout, onTimeout }) {
   return (
     <Progress
       id="question"
-      className="w-[80%] h-[1rem] rounded-[24px] mb-8 mx-auto"
-      color="purple"
+      className="w-[60%] h-[0.5rem] rounded-[24px] mb-8 mx-auto"
+      color={color}
       value={(remainingTime / timeout) * 100}
     />
   );

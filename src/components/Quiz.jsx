@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
 import QUESTIONS from "../questions.js";
-import QuestionTimer from "./QuestionTimer.jsx";
+import Question from "./Question.jsx";
 import quizCompleteImage from "../assets/quiz-complete.png";
 
 export default function Quiz() {
@@ -40,34 +40,19 @@ export default function Quiz() {
     );
   }
 
-  // Below codes only executed only when quizIsComplete === false
-  const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
-  shuffledAnswers.sort(() => Math.random() - 0.5);
+  /**
+   * Below codes executed
+   * only when "quizIsComplete === false"
+   */
 
   return (
     <div className="max-w-[50rem] m-auto p-8 bg-gradient-to-b from-[#3e2a6060] to-[#32106160] backdrop-blur-md rounded-lg shadow-dark-blue text-center">
-      <div id="question">
-        <QuestionTimer
-          key={activeQuestionIndex}
-          timeout={10000}
-          onTimeout={skipAnswerHandler}
-        />
-        <h2 className="font-roboto text-2xl font-normal mt-2 mx-0 mb-10 text-[#bdabdd]">
-          {QUESTIONS[activeQuestionIndex].text}
-        </h2>
-        <ul className="list-none m-0 p-0 flex flex-col items-center gap-2">
-          {shuffledAnswers.map((answer) => (
-            <li key={answer} id="answer" className="w-[90%] my-0 mx-auto">
-              <button
-                className="inline-block w-full font-roboto-condensed text-[0.9rem] py-4 px-8 border-none rounded-[24px] bg-[#6cb7f5] hover:bg-[#9d5af5] hover:text-purple-50 hover:shadow-yellow focus:bg-[#9d5af5] focus:text-purple-50 focus:shadow-yellow cursor-pointer"
-                onClick={() => selectAnswerHandler(answer)}
-              >
-                {answer}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Question
+        key={activeQuestionIndex}
+        index={activeQuestionIndex}
+        onSelectAnswer={selectAnswerHandler}
+        onSkipAnswer={skipAnswerHandler}
+      />
     </div>
   );
 }

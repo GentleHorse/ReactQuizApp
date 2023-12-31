@@ -1,6 +1,6 @@
 # React Quiz
 
-## Managing questions with the answer state
+## Logic of managing questions with the answer state
 
 ```
 
@@ -8,6 +8,13 @@ userAnswers = ['A', 'B']
 ---> 2 answers given (= 2 questions answered)
 ---> the next question shown should be the third question
 ---> the index of that next question would be 2 (because indexes start at 0)
+
+```
+
+## Move to the next question through variable
+
+```
+const activeQuestionIndex = userAnswers.length;
 
 ```
 
