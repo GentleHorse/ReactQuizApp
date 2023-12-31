@@ -1,11 +1,15 @@
 import { useState, useCallback } from "react";
+import useSound from "use-sound";
 
 import QUESTIONS from "../questions.js";
 import Question from "./Question.jsx";
 import Summary from "./Summary.jsx";
+import CongratulationSound from "../assets/congratulations.mp3";
 
 export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
+
+  const [playCongrtulationSound] = useSound(CongratulationSound);
 
   const activeQuestionIndex = userAnswers.length;
   const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
@@ -23,6 +27,8 @@ export default function Quiz() {
   );
 
   if (quizIsComplete) {
+    playCongrtulationSound();
+
     return <Summary userAnswers={userAnswers} />;
   }
 

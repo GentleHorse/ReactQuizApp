@@ -1,8 +1,12 @@
 import { useState } from "react";
+import useSound from 'use-sound';
 
 import QuestionTimer from "./QuestionTimer.jsx";
 import Answers from "./Answers.jsx";
 import QUESTIONS from "../questions.js";
+import ClickSound from "../assets/click.mp3";
+import CorrectSound from "../assets/correct.mp3";
+import WrongSound from "../assets/wrong.mp3";
 
 /**
  * @param {int} key activeQuestionIndex
@@ -13,6 +17,11 @@ export default function Question({ index, onSelectAnswer, onSkipAnswer }) {
     selectedAnswer: "",
     isCorrect: null,
   });
+
+  // Set up sounds
+  const [playClickSound] = useSound(ClickSound);
+  const [playCorrectSound] = useSound(CorrectSound);
+  const [playWrongSound] = useSound(WrongSound);
 
   // Change progress bar dynamically
   let timer = 10000;
@@ -35,11 +44,19 @@ export default function Question({ index, onSelectAnswer, onSkipAnswer }) {
       isCorrect: null,
     });
 
+    playClickSound();
+
     setTimeout(() => {
       setAnswer({
         selectedAnswer: answer,
         isCorrect: QUESTIONS[index].answers[0] === answer,
       });
+
+      if(QUESTIONS[index].answers[0] === answer){
+        playCorrectSound();
+      } else {
+        playWrongSound();
+      }
 
       setTimeout(() => {
         onSelectAnswer(answer);
