@@ -56,7 +56,7 @@ const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
 
 ```
 
-"use-sound": "^4.0.1"
+"use-sound": "^4.0.1",
 
 ```
 
@@ -64,6 +64,7 @@ const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
 
 ```
 
+"million": "^2.6.4",
 
 ```
 
