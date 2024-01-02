@@ -33,3 +33,37 @@ shuffledAnswers.sort(() => Math.random() - 0.5);
 const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
 
 ```
+
+## Three js
+
+```
+
+"three": "^0.160.0",
+
+"@react-three/drei": "^9.92.7",
+"@react-three/fiber": "^8.15.13",
+
+"postprocessing": "^6.34.1",
+"@react-three/postprocessing": "^2.15.11",
+
+"leva": "^0.9.35",
+
+"r3f-perf": "^7.1.2",
+
+```
+
+## Sound
+
+```
+
+"use-sound": "^4.0.1"
+
+```
+
+## Performance optimization
+
+```
+
+
+```
+
